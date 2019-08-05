@@ -1,5 +1,6 @@
 package com.guiltylogik.travelmanticsalc40;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -10,30 +11,38 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.ArrayList;
 
 public class DealsListActivity extends AppCompatActivity {
 
-    RecyclerView recyclerView;
+    ArrayList<TravelDeal> deals;
+    private FirebaseDatabase mFireDb;
+    private DatabaseReference mDataRef;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        recyclerView = findViewById(R.id.rv_deals);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        RecyclerView.LayoutManager rvLayoutmanger = layoutManager;
-        recyclerView.setLayoutManager(rvLayoutmanger);
 
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent intent = new Intent(DealsListActivity.this, AddEditActivity.class);
+                startActivity(intent);
             }
         });
+
+        RecyclerView rvDeals = findViewById(R.id.rv_deals);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        rvDeals.setLayoutManager(layoutManager);
+
+        final DealsAdapter dealsAdapter = new DealsAdapter();
+        rvDeals.setAdapter(dealsAdapter);
     }
 
     @Override

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddEditActivity">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/deal_img"
+        android:layout_width="323dp"
+        android:layout_height="219dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/add" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/save_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="104dp"
+        android:layout_marginEnd="8dp"
+        android:background="@color/colorGreen"
+        android:gravity="center"
+        android:text="@string/save_deal"
+        android:textColor="@color/colorWhite"
+        android:textSize="24sp"
+        android:textStyle="normal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ev_dealDesc" />
+
+    <EditText
+        android:id="@+id/ev_dealTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="8dp"
+        android:hint="@string/deal_title_h"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/deal_img" />
+
+    <EditText
+        android:id="@+id/ev_dealPrice"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:hint="@string/deal_price_h"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="@+id/ev_dealTitle"
+        app:layout_constraintStart_toStartOf="@+id/ev_dealTitle"
+        app:layout_constraintTop_toBottomOf="@+id/ev_dealTitle" />
+
+    <EditText
+        android:id="@+id/ev_dealDesc"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:hint="@string/deal_description"
+        android:gravity="start|top"
+        android:inputType="textMultiLine"
+        app:layout_constraintEnd_toEndOf="@+id/ev_dealPrice"
+        app:layout_constraintStart_toStartOf="@+id/ev_dealPrice"
+        app:layout_constraintTop_toBottomOf="@+id/ev_dealPrice" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
