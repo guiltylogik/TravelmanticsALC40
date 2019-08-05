@@ -18,23 +18,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/add" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/save_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="104dp"
-        android:layout_marginEnd="8dp"
-        android:background="@color/colorGreen"
-        android:gravity="center"
-        android:text="@string/save_deal"
-        android:textColor="@color/colorWhite"
-        android:textSize="24sp"
-        android:textStyle="normal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ev_dealDesc" />
 
     <EditText
         android:id="@+id/ev_dealTitle"
@@ -71,5 +54,39 @@
         app:layout_constraintEnd_toEndOf="@+id/ev_dealPrice"
         app:layout_constraintStart_toStartOf="@+id/ev_dealPrice"
         app:layout_constraintTop_toBottomOf="@+id/ev_dealPrice" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/save_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="60dp"
+        android:background="@drawable/capsule"
+        android:gravity="center"
+        android:text="@string/save_deal"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/btn_txt_size"
+        android:textStyle="normal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ev_dealDesc" />
+
+
+    <Button
+        android:id="@+id/upload_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="8dp"
+        android:padding="4dp"
+        android:gravity="center"
+        android:background="@drawable/capsule"
+        android:text="@string/add_image"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/btn_txt_size"
+        app:layout_constraintEnd_toStartOf="@+id/save_btn"
+        app:layout_constraintHorizontal_bias="0.484"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ev_dealDesc" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

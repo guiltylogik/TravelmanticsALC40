@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,6 +17,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.DatabaseReference;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -90,6 +92,7 @@ public class DealsAdapter extends RecyclerView.Adapter<DealsAdapter.DealsViewHol
         TextView dealTitle;
         TextView dealPrice;
         TextView dealDesc;
+        ImageView dealImg;
 
         public DealsViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -97,6 +100,7 @@ public class DealsAdapter extends RecyclerView.Adapter<DealsAdapter.DealsViewHol
             dealTitle = itemView.findViewById(R.id.tw_deal_title);
             dealPrice = itemView.findViewById(R.id.tw_deal_price);
             dealDesc = itemView.findViewById(R.id.tw_deal_desc);
+            dealImg = itemView.findViewById(R.id.iv_deal_image);
             itemView.setOnClickListener(this);
         }
 
@@ -104,8 +108,17 @@ public class DealsAdapter extends RecyclerView.Adapter<DealsAdapter.DealsViewHol
             dealTitle.setText(deal.getTitle());
             dealPrice.setText(String.format("GHc %s", deal.getPrice()));
             dealDesc.setText(deal.getDescription());
+            showImg(deal.getImageUrl());
         }
 
+        private void showImg(String url){
+            if(url != null && !url.isEmpty()){
+                Picasso.get()
+                        .load(url)
+//                        .centerCrop()
+                        .into(dealImg);
+            }
+        }
         @Override
         public void onClick(View view) {
             int pos = getAdapterPosition();

@@ -12,4 +12,6 @@
     <string name="delete_deal_txt">Delete Deal</string>
     <string name="add_deal_txt">Add New Deal</string>
     <string name="edit_deal_txt">Edit Deal</string>
+    <string name="add_image">Add Image</string>
+    <string name="update_img">Update Image</string>
 </resources>
