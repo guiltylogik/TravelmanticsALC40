@@ -46,7 +46,7 @@ public class AddEditActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_edit);
         setTitle(R.string.add_deal_txt);
 
-        FireBaseInit.FirebaseRef("deals");
+        FireBaseInit.FirebaseRef("deals", this);
         mFireDb = FireBaseInit.mFireDb;
         mDataRef = FireBaseInit.mDbRef;
 
@@ -74,7 +74,7 @@ public class AddEditActivity extends AppCompatActivity {
                 Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
                 intent.setType("image/jpeg");
                 intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
-                startActivityForResult(intent.createChooser(intent, "Upload Picture"), PICTURE_RC);
+                startActivityForResult(Intent.createChooser(intent, "Upload Picture"), PICTURE_RC);
             }
         });
 
@@ -104,7 +104,7 @@ public class AddEditActivity extends AppCompatActivity {
     }
 
     private void showImg(String url){
-        if(url != null && url.isEmpty() == false){
+        if(url != null && !url.isEmpty()){
             Picasso.get()
                     .load(url)
                     .into(dealImage);
@@ -149,6 +149,7 @@ public class AddEditActivity extends AppCompatActivity {
     private void backToList() {
         Intent intent = new Intent(this, DealsListActivity.class);
         startActivity(intent);
+        finish();
     }
 
     private void saveDeal() {

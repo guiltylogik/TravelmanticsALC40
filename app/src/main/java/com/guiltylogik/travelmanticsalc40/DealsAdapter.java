@@ -27,11 +27,10 @@ public class DealsAdapter extends RecyclerView.Adapter<DealsAdapter.DealsViewHol
     private DatabaseReference mDataRef;
 
     public DealsAdapter(){
-        FireBaseInit.FirebaseRef("deals");
         mFireDb = FireBaseInit.mFireDb;
         mDataRef = FireBaseInit.mDbRef;
 
-        deals = FireBaseInit.mTDs;
+        this.deals = FireBaseInit.mTDs;
 
         ChildEventListener mChildListener = new ChildEventListener() {
             @Override
@@ -115,7 +114,6 @@ public class DealsAdapter extends RecyclerView.Adapter<DealsAdapter.DealsViewHol
             if(url != null && !url.isEmpty()){
                 Picasso.get()
                         .load(url)
-//                        .centerCrop()
                         .into(dealImg);
             }
         }

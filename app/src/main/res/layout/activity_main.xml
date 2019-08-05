@@ -8,6 +8,7 @@
     tools:context=".DealsListActivity">
 
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorWhite"
@@ -26,33 +27,57 @@
                 android:layout_width="match_parent"
                 android:layout_height="240dp"
                 android:background="@color/colorWhite"
-                android:src="@drawable/headerimg"
-                app:layout_collapseMode="parallax"
                 android:contentDescription="@string/app_name"
                 android:fitsSystemWindows="true"
-                android:scaleType="centerCrop"/>
+                android:scaleType="centerCrop"
+                android:src="@drawable/headerimg"
+                app:layout_collapseMode="parallax" />
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
-    
+
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipToPadding="true"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
-    <include layout="@layout/content_main" />
+        <include layout="@layout/content_main" />
 
     </androidx.core.widget.NestedScrollView>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
-        android:backgroundTint="@color/colorGrey"
+
+    <com.getbase.floatingactionbutton.FloatingActionsMenu
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@drawable/add" />
+        app:fab_addButtonColorNormal="@color/colorGrey"
+        app:fab_addButtonColorPressed="@color/colorWhite"
+        app:fab_addButtonPlusIconColor="@color/colorWhite"
+        app:fab_labelStyle="@style/fab_btn">
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_colorNormal="@color/colorGreyTransparent"
+            app:fab_colorPressed="@color/colorWhite"
+            app:fab_title="@string/add_deal_txt"
+            app:fab_icon="@drawable/ic_add"/>
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/logout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_colorNormal="@color/colorGreyTransparent"
+            app:fab_colorPressed="@color/colorWhite"
+            app:fab_title="@string/sign_out"
+            app:fab_icon="@drawable/ic_exit"/>
+    </com.getbase.floatingactionbutton.FloatingActionsMenu>
+
+
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
