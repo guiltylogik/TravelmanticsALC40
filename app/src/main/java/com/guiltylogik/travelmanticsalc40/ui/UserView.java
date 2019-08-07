@@ -1,4 +1,4 @@
-package com.guiltylogik.travelmanticsalc40;
+package com.guiltylogik.travelmanticsalc40.ui;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +14,9 @@ import android.widget.TextView;
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.guiltylogik.travelmanticsalc40.R;
+import com.guiltylogik.travelmanticsalc40.utils.FireBaseInit;
+import com.guiltylogik.travelmanticsalc40.utils.TravelDeal;
 import com.squareup.picasso.Picasso;
 
 public class UserView extends AppCompatActivity {

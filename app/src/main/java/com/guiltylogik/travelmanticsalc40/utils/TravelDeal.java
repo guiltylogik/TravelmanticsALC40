@@ -1,4 +1,4 @@
-package com.guiltylogik.travelmanticsalc40;
+package com.guiltylogik.travelmanticsalc40.utils;
 
 import java.io.Serializable;
 

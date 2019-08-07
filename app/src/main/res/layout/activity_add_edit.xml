@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".AddEditActivity">
+    tools:context=".ui.AddEditActivity">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/deal_img"
@@ -17,7 +17,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/add" />
+        app:srcCompat="@drawable/generic" />
 
 
     <EditText
@@ -92,6 +92,36 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ev_dealDesc" />
 
+    <ProgressBar
+        android:id="@+id/im_progressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="314dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/capsule"
+        android:indeterminate="true"
+        android:max="100"
+        android:padding="2dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/deal_img"
+        app:layout_constraintEnd_toEndOf="@+id/deal_img"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/deal_img"
+        app:layout_constraintTop_toTopOf="@+id/deal_img"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/tv_progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textColor="@color/colorWhite"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/im_progressBar"
+        app:layout_constraintEnd_toEndOf="@+id/im_progressBar"
+        app:layout_constraintHorizontal_bias="0.48"
+        app:layout_constraintStart_toStartOf="@+id/im_progressBar"
+        app:layout_constraintTop_toTopOf="@+id/im_progressBar" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

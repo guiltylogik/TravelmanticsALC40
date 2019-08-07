@@ -9,10 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".UserView"></activity>
-        <activity android:name=".AddEditActivity" />
+        <activity android:name=".ui.UserView"></activity>
+        <activity android:name=".ui.AddEditActivity" />
         <activity
-            android:name=".DealsListActivity"
+            android:name=".ui.DealsListActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">

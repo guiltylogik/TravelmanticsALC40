@@ -17,7 +17,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/add" />
+        app:srcCompat="@drawable/generic" />
 
     <TextView
         android:id="@+id/u_deal_price"

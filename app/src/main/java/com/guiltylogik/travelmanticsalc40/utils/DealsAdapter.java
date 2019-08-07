@@ -1,4 +1,4 @@
-package com.guiltylogik.travelmanticsalc40;
+package com.guiltylogik.travelmanticsalc40.utils;
 
 import android.content.Context;
 import android.content.Intent;
@@ -17,6 +17,9 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.DatabaseReference;
+import com.guiltylogik.travelmanticsalc40.ui.AddEditActivity;
+import com.guiltylogik.travelmanticsalc40.R;
+import com.guiltylogik.travelmanticsalc40.ui.UserView;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -122,7 +125,7 @@ public class DealsAdapter extends RecyclerView.Adapter<DealsAdapter.DealsViewHol
             int pos = getAdapterPosition();
             TravelDeal selectedDeal = deals.get(pos);
             Intent intent = new Intent(view.getContext(), (FireBaseInit.isAdmin)
-                    ?AddEditActivity.class: UserView.class);
+                    ? AddEditActivity.class: UserView.class);
             intent.putExtra("Deal", selectedDeal);
             view.getContext().startActivity(intent);
         }

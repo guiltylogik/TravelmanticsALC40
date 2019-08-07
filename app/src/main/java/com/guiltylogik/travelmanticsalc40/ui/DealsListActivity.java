@@ -1,9 +1,7 @@
-package com.guiltylogik.travelmanticsalc40;
+package com.guiltylogik.travelmanticsalc40.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -17,6 +15,10 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.guiltylogik.travelmanticsalc40.R;
+import com.guiltylogik.travelmanticsalc40.utils.DealsAdapter;
+import com.guiltylogik.travelmanticsalc40.utils.FireBaseInit;
+import com.guiltylogik.travelmanticsalc40.utils.TravelDeal;
 
 import java.util.ArrayList;
 

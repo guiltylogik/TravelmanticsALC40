@@ -1,4 +1,4 @@
-package com.guiltylogik.travelmanticsalc40;
+package com.guiltylogik.travelmanticsalc40.ui;
 
 import android.animation.ObjectAnimator;
 import android.content.Intent;
@@ -14,6 +14,8 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -24,8 +26,12 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.guiltylogik.travelmanticsalc40.R;
+import com.guiltylogik.travelmanticsalc40.utils.FireBaseInit;
+import com.guiltylogik.travelmanticsalc40.utils.TravelDeal;
 import com.squareup.picasso.Picasso;
 
 import static android.widget.Toast.LENGTH_LONG;
@@ -37,10 +43,14 @@ public class AddEditActivity extends AppCompatActivity {
     private FirebaseDatabase mFireDb;
     private DatabaseReference mDataRef;
     TravelDeal deal;
-    EditText dealTitle;
-    EditText dealPrice;
-    EditText dealDesc;
-    ImageView dealImage;
+    private EditText dealTitle;
+    private EditText dealPrice;
+    private EditText dealDesc;
+    private ImageView dealImage;
+    private ProgressBar progressBar;
+    private TextView progress_text;
+    private Button upload_btn;
+    private Button save_btn;
 
 
     @Override
@@ -56,19 +66,24 @@ public class AddEditActivity extends AppCompatActivity {
         dealPrice = findViewById(R.id.ev_dealPrice);
         dealDesc = findViewById(R.id.ev_dealDesc);
         dealImage = findViewById(R.id.deal_img);
+        progressBar = findViewById(R.id.im_progressBar);
+        progress_text = findViewById(R.id.tv_progress);
 
 
-        final Button save_btn = findViewById(R.id.save_btn);
+        save_btn = findViewById(R.id.save_btn);
 
         save_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                saveDeal();
-                backToList();
-            }
+                if(dealTitle.getText().toString().equals("")){
+                    Toast.makeText(AddEditActivity.this, "Please! Enter deal details.", LENGTH_LONG).show();
+                } else {
+                    saveDeal();
+                    backToList();
+            }}
         });
 
-        final Button upload_btn = findViewById(R.id.upload_img);
+        upload_btn = findViewById(R.id.upload_img);
         upload_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -78,13 +93,6 @@ public class AddEditActivity extends AppCompatActivity {
                 intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
                 startActivityForResult(Intent.createChooser(intent, "Upload Picture"), PICTURE_RC);
 
-                ObjectAnimator animation = ObjectAnimator.ofFloat(save_btn, "translationX", -140f);
-                animation.setDuration(2000);
-                animation.start();
-
-                Animation fadeOut = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fade_out);
-                upload_btn.startAnimation(fadeOut);
-                upload_btn.setVisibility(View.GONE);
             }
         });
 
@@ -136,17 +144,43 @@ public class AddEditActivity extends AppCompatActivity {
         if(requestCode == PICTURE_RC && resultCode == RESULT_OK){
             final Uri imgUri = data.getData();
             final StorageReference  sRef = FireBaseInit.mStorRef.child(imgUri.getLastPathSegment());
-            sRef.putFile(imgUri).addOnSuccessListener(this, new OnSuccessListener<UploadTask.TaskSnapshot>() {
+
+
+            UploadTask uploadTask = sRef.putFile(imgUri);
+            progressBar.setVisibility(View.VISIBLE);
+            progressBar.setIndeterminate(false);
+
+            uploadTask.addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+
+                @Override
+                public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                        double progress = (100 * taskSnapshot.getBytesTransferred())/taskSnapshot.getTotalByteCount();
+                        progressBar.setProgress((int) progress);
+                        progress_text.setText((int)progress + " %");
+                }
+            }).addOnSuccessListener(this, new OnSuccessListener<UploadTask.TaskSnapshot>() {
+
+
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
+                        ObjectAnimator animation = ObjectAnimator.ofFloat(save_btn, "translationX", -140f);
+                        animation.setDuration(2000);
+                        animation.start();
+
+                        Animation fadeOut = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fade_out);
+                        upload_btn.startAnimation(fadeOut);
+                        upload_btn.setVisibility(View.GONE);
+                        progressBar.startAnimation(fadeOut);
+                        progressBar.setVisibility(View.GONE);
+                        progress_text.startAnimation(fadeOut);
+                        progress_text.setVisibility(View.GONE);
+
                         String imageName = taskSnapshot.getStorage().getName();
                         deal.setDealImageName(imageName);
-                        Log.d("ImageName", imageName);
                         sRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                             @Override
                             public void onSuccess(Uri uri) {
-                                Log.d("image", "onSuccess: uri= "+ uri.toString());
                                 deal.setImageUrl(uri.toString());
                                 showImg(uri.toString());
                             }
@@ -165,11 +199,7 @@ public class AddEditActivity extends AppCompatActivity {
 
     private void saveDeal() {
 
-        if(dealTitle.getText().toString().equals("")){
 
-            //Show warning and restart the activity with details.
-            Toast.makeText(this, "Please! Enter deal details.", LENGTH_LONG).show();
-        } else {
             deal.setTitle(dealTitle.getText().toString());
             deal.setPrice(dealPrice.getText().toString());
             deal.setDescription(dealDesc.getText().toString());
@@ -180,7 +210,6 @@ public class AddEditActivity extends AppCompatActivity {
                 mDataRef.child(deal.getId()).setValue(deal);
             }
             Toast.makeText(AddEditActivity.this, getString(R.string.save_notice), Toast.LENGTH_SHORT).show();
-        }
 
 
     }
