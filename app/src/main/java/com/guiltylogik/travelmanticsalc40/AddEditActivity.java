@@ -1,5 +1,6 @@
 package com.guiltylogik.travelmanticsalc40;
 
+import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -8,6 +9,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -46,7 +49,6 @@ public class AddEditActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_edit);
         setTitle(R.string.add_deal_txt);
 
-        FireBaseInit.FirebaseRef("deals", this);
         mFireDb = FireBaseInit.mFireDb;
         mDataRef = FireBaseInit.mDbRef;
 
@@ -56,25 +58,33 @@ public class AddEditActivity extends AppCompatActivity {
         dealImage = findViewById(R.id.deal_img);
 
 
-        Button save_btn = findViewById(R.id.save_btn);
+        final Button save_btn = findViewById(R.id.save_btn);
 
         save_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 saveDeal();
-                Toast.makeText(AddEditActivity.this, getString(R.string.save_notice), Toast.LENGTH_SHORT).show();
                 backToList();
             }
         });
 
-        Button upload_btn = findViewById(R.id.upload_img);
+        final Button upload_btn = findViewById(R.id.upload_img);
         upload_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
                 intent.setType("image/jpeg");
                 intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
                 startActivityForResult(Intent.createChooser(intent, "Upload Picture"), PICTURE_RC);
+
+                ObjectAnimator animation = ObjectAnimator.ofFloat(save_btn, "translationX", -140f);
+                animation.setDuration(2000);
+                animation.start();
+
+                Animation fadeOut = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fade_out);
+                upload_btn.startAnimation(fadeOut);
+                upload_btn.setVisibility(View.GONE);
             }
         });
 
@@ -148,22 +158,30 @@ public class AddEditActivity extends AppCompatActivity {
 
     private void backToList() {
         Intent intent = new Intent(this, DealsListActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
         finish();
     }
 
     private void saveDeal() {
 
-        deal.setTitle(dealTitle.getText().toString());
-        deal.setPrice(dealPrice.getText().toString());
-        deal.setDescription(dealDesc.getText().toString());
+        if(dealTitle.getText().toString().equals("")){
 
-        if(deal.getId() == null && deal != null){
-            mDataRef.push().setValue(deal);
-            resetInput();
-        }else{
-            mDataRef.child(deal.getId()).setValue(deal);
+            //Show warning and restart the activity with details.
+            Toast.makeText(this, "Please! Enter deal details.", LENGTH_LONG).show();
+        } else {
+            deal.setTitle(dealTitle.getText().toString());
+            deal.setPrice(dealPrice.getText().toString());
+            deal.setDescription(dealDesc.getText().toString());
+            if(deal.getId() == null && deal != null){
+                mDataRef.push().setValue(deal);
+                resetInput();
+            }else{
+                mDataRef.child(deal.getId()).setValue(deal);
+            }
+            Toast.makeText(AddEditActivity.this, getString(R.string.save_notice), Toast.LENGTH_SHORT).show();
         }
+
 
     }
 
@@ -208,10 +226,8 @@ public class AddEditActivity extends AppCompatActivity {
 
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.opt_menu, menu);
-        if(deal.getId() == null){
-            menu.findItem(R.id.delete_opt).setVisible(false);
-        }
 
         return true;
     }
+
 }

@@ -121,7 +121,8 @@ public class DealsAdapter extends RecyclerView.Adapter<DealsAdapter.DealsViewHol
         public void onClick(View view) {
             int pos = getAdapterPosition();
             TravelDeal selectedDeal = deals.get(pos);
-            Intent intent = new Intent(view.getContext(), AddEditActivity.class);
+            Intent intent = new Intent(view.getContext(), (FireBaseInit.isAdmin)
+                    ?AddEditActivity.class: UserView.class);
             intent.putExtra("Deal", selectedDeal);
             view.getContext().startActivity(intent);
         }

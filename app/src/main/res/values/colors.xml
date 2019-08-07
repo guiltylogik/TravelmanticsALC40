@@ -5,7 +5,8 @@
     <color name="colorAccent">#D81B60</color>
 
 
-    <color name="colorUpload">#C8923B</color>
+    <color name="colorUpload">#D7C8923B</color>
+    <color name="colorAdd">#AFB42B</color>
     <color name="colorGreen">#4fb053</color>
     <color name="colorWhite">#ffffff</color>
     <color name="colorGrey">#3C3F41</color>

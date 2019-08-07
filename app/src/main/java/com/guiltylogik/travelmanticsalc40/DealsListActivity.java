@@ -22,9 +22,9 @@ import java.util.ArrayList;
 
 public class DealsListActivity extends AppCompatActivity {
 
-//    ArrayList<TravelDeal> deals;
-//    private FirebaseDatabase mFireDb;
-//    private DatabaseReference mDataRef;
+    ArrayList<TravelDeal> deals;
+    private FirebaseDatabase mFireDb;
+    private DatabaseReference mDataRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,9 +32,10 @@ public class DealsListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
+
         FloatingActionButton fab = findViewById(R.id.fab);
-        if(!FireBaseInit.isAdmin)
-            fab.setVisibility(View.GONE);
+        if(!FireBaseInit.isAdmin){
+            fab.setVisibility(View.GONE);}
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -71,6 +72,8 @@ public class DealsListActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         FireBaseInit.FirebaseRef("deals", this);
+
+        FireBaseInit.authConnect();
 
         RecyclerView rvDeals = findViewById(R.id.rv_deals);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);

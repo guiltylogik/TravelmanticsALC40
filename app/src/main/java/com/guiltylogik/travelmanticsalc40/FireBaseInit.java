@@ -22,22 +22,22 @@ import java.util.List;
 
 public class FireBaseInit {
 
-    public static final int RC_SIGN_IN = 012;
+    public static final int RC_SIGN_IN = 12;
     public static FirebaseDatabase mFireDb;
     public static DatabaseReference mDbRef;
     public static FirebaseStorage mFbStor;
     public static StorageReference mStorRef;
-    public  static FirebaseAuth mFbAuth;
+    public static FirebaseAuth mFbAuth;
     public static  FirebaseAuth.AuthStateListener mAuthListener;
 
     public static ArrayList<TravelDeal> mTDs;
     private static FireBaseInit mFireBaseInit;
-    private static Activity callerFb;
+    private static DealsListActivity callerFb;
     public static boolean isAdmin;
 
     private FireBaseInit(){}
 
-    public static void FirebaseRef(String ref, final Activity callerActivity){
+    public static void FirebaseRef(String ref, final DealsListActivity callerActivity){
 
         if(mFireBaseInit == null){
             mFireBaseInit = new FireBaseInit();
@@ -48,19 +48,20 @@ public class FireBaseInit {
             mAuthListener = new FirebaseAuth.AuthStateListener() {
                 @Override
                 public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                    if(mFbAuth.getCurrentUser() == null){
-                        FireBaseInit.signIn();
+                    if(firebaseAuth.getCurrentUser() == null){
+                        if (FireBaseInit.signIn()){
+                        Toast.makeText(callerFb.getBaseContext(), "Signed in.", Toast.LENGTH_LONG)
+                            .show();
+                        }
                     }else{
-                        String userId = mFbAuth.getUid();
+                        String userId = firebaseAuth.getUid();
                         checkLevel(userId);
                     }
-                    Toast.makeText(callerFb.getBaseContext(), "Signed In", Toast.LENGTH_LONG)
-                            .show();
                 }
             };
         }
 
-        mTDs = new ArrayList<>();
+        mTDs = new ArrayList<TravelDeal>();
         mDbRef = mFireDb.getReference().child(ref);
 
         storConnect();
@@ -69,8 +70,7 @@ public class FireBaseInit {
 
     private static void checkLevel(String userId) {
         FireBaseInit.isAdmin = false;
-        DatabaseReference mRef = mFireDb.getReference().child("admins")
-                .child(userId);
+        DatabaseReference mRef = mFireDb.getReference().child("admins").child(userId);
         ChildEventListener childEventListener = new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
@@ -100,7 +100,7 @@ public class FireBaseInit {
         mRef.addChildEventListener(childEventListener);
     }
 
-    private static void signIn() {
+    private static boolean signIn() {
         // Choose authentication providers
         List<AuthUI.IdpConfig> providers = Arrays.asList(
                 new AuthUI.IdpConfig.EmailBuilder().build(),
@@ -112,8 +112,10 @@ public class FireBaseInit {
                 AuthUI.getInstance()
                         .createSignInIntentBuilder()
                         .setAvailableProviders(providers)
+                        .setIsSmartLockEnabled(true)
                         .build(),
                 RC_SIGN_IN);
+        return true;
     }
 
     public static void storConnect(){
