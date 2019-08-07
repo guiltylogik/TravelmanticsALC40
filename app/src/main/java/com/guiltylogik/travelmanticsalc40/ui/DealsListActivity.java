@@ -83,6 +83,5 @@ public class DealsListActivity extends AppCompatActivity {
 
         final DealsAdapter dealsAdapter = new DealsAdapter();
         rvDeals.setAdapter(dealsAdapter);
-        FireBaseInit.authConnect();
     }
 }

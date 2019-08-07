@@ -20,48 +20,71 @@
         app:srcCompat="@drawable/generic" />
 
 
-    <EditText
-        android:id="@+id/ev_dealTitle"
-        android:layout_width="0dp"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/txl_title"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
-        android:hint="@string/deal_title_h"
-        android:inputType="textPersonName"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/deal_img" />
+        app:layout_constraintTop_toBottomOf="@+id/deal_img">
 
-    <EditText
-        android:id="@+id/ev_dealPrice"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:hint="@string/deal_price_h"
-        android:inputType="number"
-        app:layout_constraintEnd_toEndOf="@+id/ev_dealTitle"
-        app:layout_constraintStart_toStartOf="@+id/ev_dealTitle"
-        app:layout_constraintTop_toBottomOf="@+id/ev_dealTitle" />
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/ev_dealTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/deal_title_h" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-    <EditText
-        android:id="@+id/ev_dealDesc"
-        android:layout_width="0dp"
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/txl_price"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:hint="@string/deal_description"
-        android:gravity="start|top"
-        android:inputType="textMultiLine"
-        app:layout_constraintEnd_toEndOf="@+id/ev_dealPrice"
-        app:layout_constraintStart_toStartOf="@+id/ev_dealPrice"
-        app:layout_constraintTop_toBottomOf="@+id/ev_dealPrice" />
+        android:layout_marginEnd="8dp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txl_title">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/ev_dealPrice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/deal_price_h" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/txl_desc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txl_price">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/ev_dealDesc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/deal_description" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/save_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:layout_marginEnd="68dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="64dp"
         android:background="@color/colorGreen"
         android:gravity="center"
         android:text="@string/save_deal"
@@ -70,7 +93,7 @@
         android:textStyle="normal"
         app:cornerRadius="15dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ev_dealDesc" />
+        app:layout_constraintTop_toBottomOf="@+id/txl_desc" />
 
 
     <Button
@@ -78,7 +101,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="56dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="50dp"
         android:layout_marginEnd="8dp"
         android:background="@color/colorAdd"
         android:gravity="center"
@@ -88,9 +111,9 @@
         android:textSize="16sp"
         app:cornerRadius="15dp"
         app:layout_constraintEnd_toStartOf="@+id/save_btn"
-        app:layout_constraintHorizontal_bias="0.081"
+        app:layout_constraintHorizontal_bias="0.098"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ev_dealDesc" />
+        app:layout_constraintTop_toBottomOf="@+id/txl_desc" />
 
     <ProgressBar
         android:id="@+id/im_progressBar"
