@@ -42,6 +42,7 @@ public class DealsListActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(DealsListActivity.this, AddEditActivity.class);
+                intent.putExtra("addDeal", "new deal");
                 startActivity(intent);
 //                finish();
             }

@@ -11,4 +11,11 @@
     <color name="colorWhite">#ffffff</color>
     <color name="colorGrey">#3C3F41</color>
     <color name="colorGreyTransparent">#AB3C3F41</color>
+
+    <color name="material_green_600">#43A047</color>
+    <color name="material_green_500">#4CAF50</color>
+    <color name="material_green_700">#388E3C</color>
+    <color name="material_green_a200">#69F0AE</color>
+    <color name="material_lime_a800">#F2D32F2F</color>
+    <color name="material_lime_50">#F9FBE7</color>
 </resources>

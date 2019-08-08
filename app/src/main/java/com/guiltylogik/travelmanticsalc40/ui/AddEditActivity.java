@@ -256,6 +256,9 @@ public class AddEditActivity extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.opt_menu, menu);
 
+        if(deal.getId() == null)
+            menu.findItem(R.id.delete_opt).setVisible(false);
+
         return true;
     }
 

@@ -14,6 +14,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.guiltylogik.travelmanticsalc40.R;
 import com.guiltylogik.travelmanticsalc40.ui.DealsListActivity;
 
 import java.util.ArrayList;
@@ -111,6 +112,8 @@ public class FireBaseInit {
         callerFb.startActivityForResult(
                 AuthUI.getInstance()
                         .createSignInIntentBuilder()
+                        .setLogo(R.drawable.logo)
+                        .setTheme(R.style.CustomTheme)
                         .setAvailableProviders(providers)
                         .setIsSmartLockEnabled(true)
                         .build(),
