@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorPrimaryDark">#293D7C</color>
     <color name="colorAccent">#D81B60</color>
 
 
@@ -11,6 +11,7 @@
     <color name="colorWhite">#ffffff</color>
     <color name="colorGrey">#3C3F41</color>
     <color name="colorGreyTransparent">#AB3C3F41</color>
+    <color name="colorLogo">#293D7C</color>
 
     <color name="material_green_600">#43A047</color>
     <color name="material_green_500">#4CAF50</color>
